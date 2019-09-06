@@ -1,5 +1,6 @@
 import {Md5} from "md5-typescript"
 import * as ls from 'local-storage'
+import { unique } from "mobx/lib/internal";
 
 /**
  * 生成签名 和后端约定
@@ -65,4 +66,17 @@ export function trim (str: string, isAll?: boolean): string {
     return str.replace(/\s+/g, '')
   }
   return str.replace(/^\s+|\s+$/g, '')
+}
+
+/**
+ * 
+ * @param array 
+ * @param key 
+ */
+export function uniqueById<T extends {id: number}>(array: Array<T>): Array<T> {
+  const hash: any = {}
+  return array.reduce((item: T[], next) => {
+    hash[next.id] ? '' : hash[next.id] = true && item.push(next);
+    return item
+  }, [])
 }

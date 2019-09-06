@@ -4,7 +4,7 @@ import 'amfe-flexible'
 import Routes from './routes/index'
 import { Provider } from 'mobx-react'
 import * as serviceWorker from './serviceWorker'
-import stores from './stores/index'
+import stores from './stores'
 
 const MOUNT_NODE = document.getElementById('root')
 

@@ -4,10 +4,10 @@ import { inject } from 'mobx-react';
 import UserStore from '../stores/UserStore';
 
 interface AuthorizedRouteProps extends RouteProps {
-  UserStore?: UserStore
+  userStore?: UserStore
 }
 
-@inject('UserStore')
+@inject('userStore')
 class AuthorizedRoute extends React.Component <AuthorizedRouteProps> {
   componentDidMount () {
   }
@@ -18,7 +18,7 @@ class AuthorizedRoute extends React.Component <AuthorizedRouteProps> {
       <Route 
         {...rest}
         render={props => {
-          return (this.props.UserStore && this.props.UserStore.isLogin) ?
+          return (this.props.userStore && this.props.userStore.isLogin) ?
           (<Component {...props} />) : (<Redirect to={{pathname: '/login', state: {from: props.location}}} />)
         }}
       ></Route>

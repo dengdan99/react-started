@@ -12,4 +12,18 @@ declare namespace ApiParams {
     fuid?: number
     terminal?: number
   }
+
+  interface getFeeds {
+    spm?: string,
+    page: number,
+    longitude?: number,
+    latitude?: number,
+  }
+
+  interface getBrands {
+    page: number
+    pageSize: number
+    vehicle_type: 'car' | 'moto'
+    is_need_all: 0 | 1
+  }
 }

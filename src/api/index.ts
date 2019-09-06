@@ -14,3 +14,11 @@ export function loginByTel(data: ApiParams.loginByTel): Promise<AjaxResponse> {
   return remotePost('/account/login/tellogin', data)
 }
 
+export function getFeeds(data: ApiParams.getFeeds): Promise<AjaxResponse> {
+  return remoteGet('/feed/square/square', data)
+}
+
+export function getBrands(data: ApiParams.getBrands): Promise<AjaxResponse> {
+  return remoteGet('/car/brand/lists', data)
+}
+

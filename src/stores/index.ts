@@ -1,7 +1,9 @@
 import UserStore from './UserStore';
 import RouterStore from './RouterStore';
+import LocationStore from './LocationStore';
 
 export default {
-  RouterStore: new RouterStore(),
-  UserStore: new UserStore(),
+  routerStore: new RouterStore(),
+  userStore: new UserStore(),
+  locationStore: new LocationStore(),
 }

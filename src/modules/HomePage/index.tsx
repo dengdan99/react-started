@@ -6,6 +6,9 @@ import AuthorizedRoute from '../../routes/AuthorizedRoute';
 import './index.HomePage.scss'
 import { NavBar, Popover, Icon } from 'antd-mobile';
 import Loading from '../../components/Loading';
+import { inject, observer, Provider } from 'mobx-react';
+import HomePageStore from './stores'
+import LocationStore from '../../stores/LocationStore';
 
 const Home = Loadable({
   loader: () => import('./containers/Home'),
@@ -28,9 +31,8 @@ const My = Loadable({
   loading: Loading,
 })
 
-// 这部分是坑点，一开始不知道配置，后发现react-rotuer的4.0版本下需要配置prop的接口
 export interface HomePageContainerProps extends RouteComponentProps<{}> {
-  /** MobX Stores will be injected via @inject() **/
+  locationStore: LocationStore
 }
 
 const menus = [
@@ -41,6 +43,8 @@ const menus = [
   { name: 'my', path: '/home/my' },
 ]
 
+@inject('locationStore')
+@observer
 class HomePageContainer extends React.Component<HomePageContainerProps, {}> {
   state = {
     menuVisible: false,
@@ -62,37 +66,39 @@ class HomePageContainer extends React.Component<HomePageContainerProps, {}> {
 
   render () {
     return (
-      
-      <div className="homepage">
-        <NavBar
-          mode="light"
-          rightContent={
-            <Popover
-              mask
-              visible={this.state.menuVisible}
-              overlay={menus.map((m, key) => (
-                <Popover.Item key={key}>{m.name}</Popover.Item>
-              ))}
-              onVisibleChange={this.handlerVisibleChange}
-              onSelect={this.onSelect}
-            >
-              <Icon type="ellipsis" />
-            </Popover>
-          }
-        >homepage</NavBar>
-        <h2 className="my-title">this is home page container</h2>
-        
-        <Switch>
-          <Route path="/" exact component={Home}/>
-          <Route path="/home" exact component={Home}/>
-          <Route path="/home/friend" exact component={Friend}/>
-          <Route path="/home/car" exact component={Car}/>
-          <Route path="/home/message" exact component={Message}/>
-          {/* <Route path="/home/my" exact component={My}/> */}
-          <AuthorizedRoute path="/home/my" component={My}></AuthorizedRoute>
-          <Redirect from="*" to="/404" />
-        </Switch>
-      </div>
+      <Provider {...HomePageStore}>
+        <div className="homepage">
+          <NavBar
+            mode="light"
+            rightContent={
+              <Popover
+                mask
+                visible={this.state.menuVisible}
+                overlay={menus.map((m, key) => (
+                  <Popover.Item key={key}>{m.name}</Popover.Item>
+                ))}
+                onVisibleChange={this.handlerVisibleChange}
+                onSelect={this.onSelect}
+              >
+                <Icon type="ellipsis" />
+              </Popover>
+            }
+          >homepage</NavBar>
+          <h2 className="my-title">this is home page container</h2>
+          <p>{this.props.locationStore.coords ? this.props.locationStore.coords.longitude : '位置获取中'}</p>
+          
+          <Switch>
+            <Route path="/" exact component={Home}/>
+            <Route path="/home" exact component={Home}/>
+            <Route path="/home/friend" exact component={Friend}/>
+            <Route path="/home/car" exact component={Car}/>
+            <Route path="/home/message" exact component={Message}/>
+            {/* <Route path="/home/my" exact component={My}/> */}
+            <AuthorizedRoute path="/home/my" component={My}></AuthorizedRoute>
+            <Redirect from="*" to="/404" />
+          </Switch>
+        </div>
+      </Provider>
     )
   }
 }

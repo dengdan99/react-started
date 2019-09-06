@@ -7,14 +7,14 @@ interface LoadingProps {
 
 class Loading extends React.Component<LoadingProps> {
   componentDidMount () {
-    Toast.loading('加载中')
+    Toast.loading(this.props.text || '加载中')
   }
   componentWillUnmount () {
     Toast.hide()
   }
 
   render () {
-    return (<div></div>)
+    return null
   }
 }
 

@@ -3,7 +3,7 @@
 
 
 ## 前言 ##
-根据工作业务需求，开发的前端架构， 能承担较大项目，使用的时候直接 fork
+根据工作业务需求，开发的前端架构， 能承担较大的H5项目，使用的时候直接 fork
 
 ## 主要技术栈 ##
 > typescript, react, react-router, mobx, axios, webpack 等
@@ -13,6 +13,7 @@
 
 ## 技术特点 ##
 - [x] 文件及功能划分
+- [x] 基于 amfe-flexible + pxToRem 的高清布局
 - [x] 模块化
 - [x] 全局状态管理
 - [x] 路由鉴权

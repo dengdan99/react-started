@@ -6,24 +6,24 @@ import LoginForm from '../components/LoginForm';
 import { Toast } from 'antd-mobile';
 
 interface LoginContainerProps extends RouteComponentProps<{}> {
-  UserStore: UserStore
+  userStore: UserStore
 }
 interface LoginContainerState {
   loading: boolean
 }
 
-@inject('UserStore')
+@inject('userStore')
 class LoginContainer extends React.Component<LoginContainerProps, LoginContainerState> {
   readonly state: LoginContainerState = {
     loading: false
   }
 
   onSubmit = (mobile: string, code: string) => {
-    const { UserStore } = this.props
+    const { userStore } = this.props
     const { loading } = this.state
     if (loading) return
     this.setState({loading: true})
-    UserStore.signIn({
+    userStore.signIn({
       tel: mobile,
       ver_code: code,
       current_city: 3267

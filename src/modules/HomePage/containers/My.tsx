@@ -5,21 +5,21 @@ import UserStore from '../../../stores/UserStore';
 import { Button, WingBlank, WhiteSpace } from 'antd-mobile';
 
 export interface MyProps extends RouteComponentProps<{}> {
-  UserStore: UserStore
+  userStore: UserStore
 }
 
-@inject('UserStore')
+@inject('userStore')
 class My extends React.Component<MyProps> {
 
   onClickLogout = () => {
-    this.props.UserStore.logout()
+    this.props.userStore.logout()
     this.props.history.push('/')
   }
 
   render () {
     return (
       <WingBlank>
-        <h2>你好，{this.props.UserStore.nickname}</h2>
+        <h2>你好，{this.props.userStore.nickname}</h2>
         <div><Link to="/personal/info">这里是个人中心</Link></div>
         <WhiteSpace />
         <Button onClick={this.onClickLogout}>退出</Button>

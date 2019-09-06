@@ -1,0 +1,24 @@
+.brand-drawer{
+  position: relative;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  .am-drawer-sidebar {
+    background-color: #fff;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    .am-list {
+      padding: 0;
+    }
+  }
+  .loading-thumb{
+    height: 22px;
+    width: 22px;
+    background-color: rgb(231, 231, 231);
+  }
+  .loading-line{
+    width: 50%;
+    height: 22px;
+    background-color: rgb(231, 231, 231);
+  }
+}
